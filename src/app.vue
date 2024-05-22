@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import Board from '@/components/board.vue'
+import Game from '@/components/game.vue'
 </script>
 
 <template>
-  <div class="flex p-2">
-    <Board />
-  </div>
+  <Game />
 </template>

@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import type { SquareType } from '@/types'
+
 type Props = {
-  value: string | null
+  value: SquareType
   index: number
+  winning?: boolean
 }
 const props = defineProps<Props>()
 
@@ -16,6 +19,7 @@ const emit = defineEmits<Emits>()
   <button
     @click="emit('click', props.index)"
     class="border border-[#999] font-bold text-2xl -mr-[1px] -mt-[1px] flex items-center justify-center w-[34px] leading-[34px] h-[34px]"
+    :class="{ 'text-red-500': props.winning }"
   >
     {{ value }}
   </button>

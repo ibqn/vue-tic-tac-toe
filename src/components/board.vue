@@ -1,24 +1,22 @@
 <script setup lang="ts">
 import Square from '@/components/square.vue'
-import { ref, onMounted } from 'vue'
+import type { SquareType } from '@/types'
+import { onMounted } from 'vue'
 
-type SquareType = string | null
+type Props = {
+  squares: SquareType[]
+  winningLine?: number[]
+}
+const props = defineProps<Props>()
 
-const squares = ref<SquareType[]>(Array(9).fill(null))
-const isXNext = ref(true)
-
-const handleSquareClick = (index: number) => {
-  console.log('click', index)
-  if (isXNext.value) {
-    squares.value[index] = 'X'
-  } else {
-    squares.value[index] = 'O'
-  }
-  isXNext.value = !isXNext.value
+type Emits = {
+  square: [index: number]
 }
 
+const emit = defineEmits<Emits>()
+
 onMounted(() => {
-  console.log('mounted', squares.value)
+  console.log('mounted', props.squares)
 })
 </script>
 
@@ -29,7 +27,8 @@ onMounted(() => {
       v-for="(square, index) in squares"
       :key="index"
       :index
-      @click="handleSquareClick"
+      @click="emit('square', index)"
+      :winning="winningLine?.includes(index)"
     />
   </div>
 </template>
