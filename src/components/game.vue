@@ -20,6 +20,12 @@ const status = computed(() => {
   }
 })
 
+const initialPosition = () => {
+  squares.value = Array(9).fill(null)
+  move.value = 0
+  history.value = []
+}
+
 const handleSquare = (index: number) => {
   console.log('click', index)
 
@@ -52,7 +58,10 @@ const jumpTo = (index: number) => {
       </div>
     </div>
 
+    <div class="border border-slate-600"></div>
+
     <div class="flex flex-col gap-2">
+      <button @click="initialPosition">initial position</button>
       <h2>Moves:</h2>
       <ul>
         <li v-for="(move, index) in history" :key="index">
