@@ -61,15 +61,18 @@ const jumpTo = (index: number) => {
     <div class="border border-slate-600"></div>
 
     <div class="flex flex-col gap-2">
-      <button @click="initialPosition">initial position</button>
-      <h2>Moves:</h2>
-      <ul>
-        <li v-for="(move, index) in history" :key="index">
-          <button @click="() => jumpTo(index)">
-            {{ index + 1 }}. {{ index % 2 === 0 ? 'X' : 'O' }}-{{ move + 1 }}
-          </button>
-        </li>
-      </ul>
+      <button @click="initialPosition">Initial position</button>
+      <template v-if="history.length">
+        <h2>Moves:</h2>
+        <ul>
+          <li v-for="(move, index) in history" :key="index">
+            <button @click="() => jumpTo(index)">
+              {{ index + 1 }}. {{ index % 2 === 0 ? 'X' : 'O' }}-{{ move + 1 }}
+            </button>
+          </li>
+        </ul>
+      </template>
+      <div v-else>Let's go!</div>
     </div>
   </div>
 </template>
