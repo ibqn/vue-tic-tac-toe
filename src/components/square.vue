@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { SquareType } from '@/types'
+import { inject } from 'vue'
 
 type Props = {
   value: SquareType
@@ -8,17 +9,13 @@ type Props = {
 }
 const props = defineProps<Props>()
 
-type Emits = {
-  click: [index: number]
-}
-
-const emit = defineEmits<Emits>()
+const handleSquare = inject('handleSquare') as (index: number) => void
 </script>
 
 <template>
   <button
-    @click="emit('click', props.index)"
-    class="border border-[#999] font-bold text-2xl -mr-[1px] -mt-[1px] flex items-center justify-center w-[34px] leading-[34px] h-[34px]"
+    @click="handleSquare(props.index)"
+    class="border border-[#999] font-bold text-2xl -mr-px -mt-px flex items-center justify-center w-[34px] leading-[34px] h-[34px]"
     :class="{ 'text-red-500': props.winning }"
   >
     {{ value }}

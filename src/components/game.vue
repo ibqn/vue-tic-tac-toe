@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, provide, ref } from 'vue'
 import Board from '@/components/board.vue'
 import type { SquareType } from '@/types'
 import { calculateWinner, isDraw } from '@/utils'
@@ -37,6 +37,8 @@ const handleSquare = (index: number) => {
   move.value = history.value.length
 }
 
+provide('handleSquare', handleSquare)
+
 const jumpTo = (index: number) => {
   move.value = index + 1
   squares.value = history.value.slice(0, index + 1).reduce((position, currentMove, moveIndex) => {
@@ -54,7 +56,7 @@ const jumpTo = (index: number) => {
       </div>
 
       <div class="flex p-2">
-        <Board :squares @square="handleSquare" :winningLine="winner?.line" />
+        <Board :squares :winningLine="winner?.line" />
       </div>
     </div>
 

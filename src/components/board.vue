@@ -9,12 +9,6 @@ type Props = {
 }
 const props = defineProps<Props>()
 
-type Emits = {
-  square: [index: number]
-}
-
-const emit = defineEmits<Emits>()
-
 onMounted(() => {
   console.log('mounted', props.squares)
 })
@@ -27,7 +21,6 @@ onMounted(() => {
       v-for="(square, index) in squares"
       :key="index"
       :index
-      @click="emit('square', index)"
       :winning="winningLine?.includes(index)"
     />
   </div>
