@@ -15,7 +15,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="grid grid-cols-3 grid-rows-3 mt-[1px] mr-[1px]">
+  <div class="grid grid-cols-3 grid-rows-3 mt-px mr-px">
     <Square
       :value="square"
       v-for="(square, index) in squares"
